@@ -8,28 +8,39 @@
 package com.example.myapplication;
 
 public final class R {
+    public static final class array {
+        /**  From: file:/C:/AndroidStudioProjects/MyApplicationProject/MyApplication/src/main/res/values/category_dropdown_list.xml 
+         */
+        public static final int categories_array=0x7f050000;
+    }
     public static final class attr {
     }
     public static final class drawable {
         public static final int arrow=0x7f020000;
         public static final int book=0x7f020001;
-        public static final int ic_launcher=0x7f020002;
-        public static final int listicon=0x7f020003;
+        public static final int buybook=0x7f020002;
+        public static final int ic_launcher=0x7f020003;
+        public static final int listicon=0x7f020004;
     }
     public static final class id {
-        public static final int artist=0x7f060009;
-        public static final int duration=0x7f06000a;
-        public static final int img01=0x7f060007;
-        public static final int item_detail=0x7f060003;
-        public static final int item_detail_container=0x7f060000;
-        public static final int item_list=0x7f060001;
-        public static final int layout1=0x7f060002;
-        public static final int list_image=0x7f060006;
-        public static final int rl01=0x7f060004;
-        public static final int text01=0x7f06000c;
-        public static final int thumbnail=0x7f060005;
-        public static final int title=0x7f060008;
-        public static final int vw01=0x7f06000b;
+        public static final int artist=0x7f08000c;
+        public static final int btnLogin=0x7f080010;
+        public static final int category_spinner=0x7f080006;
+        public static final int duration=0x7f08000d;
+        public static final int header=0x7f080005;
+        public static final int img01=0x7f08000a;
+        public static final int item_detail=0x7f080003;
+        public static final int item_detail_container=0x7f080000;
+        public static final int item_list=0x7f080001;
+        public static final int layout1=0x7f080002;
+        public static final int link_to_register=0x7f080011;
+        public static final int list_image=0x7f080009;
+        public static final int rl01=0x7f080004;
+        public static final int searchText=0x7f080007;
+        public static final int text01=0x7f08000f;
+        public static final int thumbnail=0x7f080008;
+        public static final int title=0x7f08000b;
+        public static final int vw01=0x7f08000e;
     }
     public static final class layout {
         public static final int activity_item_detail=0x7f030000;
@@ -40,21 +51,23 @@ public final class R {
         public static final int activity_item_twopane=0x7f030002;
         public static final int activitylayout=0x7f030003;
         public static final int fragment_item_detail=0x7f030004;
-        public static final int list_row=0x7f030005;
-        public static final int listrow=0x7f030006;
+        public static final int home_page=0x7f030005;
+        public static final int list_row=0x7f030006;
+        public static final int listrow=0x7f030007;
+        public static final int login_page=0x7f030008;
     }
     public static final class string {
         /**  From: file:/C:/AndroidStudioProjects/MyApplicationProject/MyApplication/src/main/res/values/strings.xml 
          */
-        public static final int app_name=0x7f040000;
+        public static final int app_name=0x7f060000;
         /**  From: file:/C:/AndroidStudioProjects/MyApplicationProject/MyApplication/src/main/res/values/endless_list_usingfragment_strings.xml 
          */
-        public static final int list_item_number=0x7f040001;
-        public static final int loading_message=0x7f040002;
-        public static final int selected_element_message=0x7f040003;
+        public static final int list_item_number=0x7f060001;
+        public static final int loading_message=0x7f060002;
+        public static final int selected_element_message=0x7f060003;
         /**  From: file:/C:/AndroidStudioProjects/MyApplicationProject/MyApplication/src/main/res/values/strings.xml 
          */
-        public static final int title_item_detail=0x7f040004;
+        public static final int title_item_detail=0x7f060004;
     }
     public static final class style {
         /**  From: file:/C:/AndroidStudioProjects/MyApplicationProject/MyApplication/src/main/res/values/styles.xml 
@@ -68,9 +81,12 @@ public final class R {
  From: file:/C:/AndroidStudioProjects/MyApplicationProject/MyApplication/src/main/res/values-v14/styles.xml 
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f050000;
+        public static final int AppBaseTheme=0x7f070000;
         /**  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f050001;
+        public static final int AppTheme=0x7f070001;
+    }
+    public static final class xml {
+        public static final int searchable=0x7f040000;
     }
 }

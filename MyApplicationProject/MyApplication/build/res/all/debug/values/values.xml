@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- From: file:/C:/AndroidStudioProjects/MyApplicationProject/MyApplication/src/main/res/values/category_dropdown_list.xml -->
+    <string-array name="categories_array">
+        <item>Book Name</item>
+        <item>ISBN</item>
+        <item>Author Name</item>
+        <item>Subject</item>
+    </string-array>
     <!-- From: file:/C:/AndroidStudioProjects/MyApplicationProject/MyApplication/src/main/res/values/strings.xml -->
     <string name="app_name">My Application</string>
     <!-- From: file:/C:/AndroidStudioProjects/MyApplicationProject/MyApplication/src/main/res/values/endless_list_usingfragment_strings.xml -->

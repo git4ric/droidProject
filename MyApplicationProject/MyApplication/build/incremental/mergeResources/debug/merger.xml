@@ -14,6 +14,11 @@
                 qualifiers="hdpi"
                 type="drawable" />
             <file
+                name="buybook"
+                path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res\drawable-hdpi\buybook.png"
+                qualifiers="hdpi"
+                type="drawable" />
+            <file
                 name="ic_launcher"
                 path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res\drawable-hdpi\ic_launcher.png"
                 qualifiers="hdpi"
@@ -64,6 +69,11 @@
                 qualifiers=""
                 type="layout" />
             <file
+                name="home_page"
+                path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res\layout\home_page.xml"
+                qualifiers=""
+                type="layout" />
+            <file
                 name="listrow"
                 path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res\layout\listrow.xml"
                 qualifiers=""
@@ -73,6 +83,29 @@
                 path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res\layout\list_row.xml"
                 qualifiers=""
                 type="layout" />
+            <file
+                name="login_page"
+                path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res\layout\login_page.xml"
+                qualifiers=""
+                type="layout" />
+            <file
+                path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res\values\category_dropdown_list.xml"
+                qualifiers="" >
+                <string-array name="categories_array" >
+                    <item>
+Book Name
+                    </item>
+                    <item>
+ISBN
+                    </item>
+                    <item>
+Author Name
+                    </item>
+                    <item>
+Subject
+                    </item>
+                </string-array>
+            </file>
             <file
                 path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res\values\endless_list_usingfragment_strings.xml"
                 qualifiers="" >
@@ -153,6 +186,11 @@
                     <!-- API 14 theme customizations can go here. -->
                 </style>
             </file>
+            <file
+                name="searchable"
+                path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res\xml\searchable.xml"
+                qualifiers=""
+                type="xml" />
         </source>
         <source path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\build\res\rs\debug" />
     </dataSet>
