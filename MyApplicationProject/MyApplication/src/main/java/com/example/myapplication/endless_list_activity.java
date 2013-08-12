@@ -26,6 +26,7 @@ import android.widget.Toast;
  * Activity that calls an endless list using fragment 
  */
 public class endless_list_activity extends Activity implements FragmentEndlessList.Callbacks{
+    //Test commit
 
     /** Called when the activity is first created. */
     @Override
