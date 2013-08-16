@@ -9,7 +9,7 @@ package com.example.myapplication;
 
 public final class R {
     public static final class array {
-        /**  From: file:/C:/AndroidStudioProjects/MyApplicationProject/MyApplication/src/main/res/values/category_dropdown_list.xml 
+        /**  From: file:/C:/repo/droidProject/MyApplicationProject/MyApplication/src/main/res/values/category_dropdown_list.xml 
          */
         public static final int categories_array=0x7f050000;
     }
@@ -44,8 +44,8 @@ public final class R {
     }
     public static final class layout {
         public static final int activity_item_detail=0x7f030000;
-        /**  From: file:/C:/AndroidStudioProjects/MyApplicationProject/MyApplication/src/main/res/values-large/refs.xml 
- From: file:/C:/AndroidStudioProjects/MyApplicationProject/MyApplication/src/main/res/values-sw600dp/refs.xml 
+        /**  From: file:/C:/repo/droidProject/MyApplicationProject/MyApplication/src/main/res/values-large/refs.xml 
+ From: file:/C:/repo/droidProject/MyApplicationProject/MyApplication/src/main/res/values-sw600dp/refs.xml 
          */
         public static final int activity_item_list=0x7f030001;
         public static final int activity_item_twopane=0x7f030002;
@@ -57,28 +57,28 @@ public final class R {
         public static final int login_page=0x7f030008;
     }
     public static final class string {
-        /**  From: file:/C:/AndroidStudioProjects/MyApplicationProject/MyApplication/src/main/res/values/strings.xml 
+        /**  From: file:/C:/repo/droidProject/MyApplicationProject/MyApplication/src/main/res/values/strings.xml 
          */
         public static final int app_name=0x7f060000;
-        /**  From: file:/C:/AndroidStudioProjects/MyApplicationProject/MyApplication/src/main/res/values/endless_list_usingfragment_strings.xml 
+        /**  From: file:/C:/repo/droidProject/MyApplicationProject/MyApplication/src/main/res/values/endless_list_usingfragment_strings.xml 
          */
         public static final int list_item_number=0x7f060001;
         public static final int loading_message=0x7f060002;
         public static final int selected_element_message=0x7f060003;
-        /**  From: file:/C:/AndroidStudioProjects/MyApplicationProject/MyApplication/src/main/res/values/strings.xml 
+        /**  From: file:/C:/repo/droidProject/MyApplicationProject/MyApplication/src/main/res/values/strings.xml 
          */
         public static final int title_item_detail=0x7f060004;
     }
     public static final class style {
-        /**  From: file:/C:/AndroidStudioProjects/MyApplicationProject/MyApplication/src/main/res/values/styles.xml 
+        /**  From: file:/C:/repo/droidProject/MyApplicationProject/MyApplication/src/main/res/values/styles.xml 
 
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
         
- From: file:/C:/AndroidStudioProjects/MyApplicationProject/MyApplication/src/main/res/values-v11/styles.xml 
+ From: file:/C:/repo/droidProject/MyApplicationProject/MyApplication/src/main/res/values-v11/styles.xml 
  API 11 theme customizations can go here. 
- From: file:/C:/AndroidStudioProjects/MyApplicationProject/MyApplication/src/main/res/values-v14/styles.xml 
+ From: file:/C:/repo/droidProject/MyApplicationProject/MyApplication/src/main/res/values-v14/styles.xml 
  API 14 theme customizations can go here. 
          */
         public static final int AppBaseTheme=0x7f070000;

@@ -2,94 +2,94 @@
 <merger>
 
     <dataSet config="main" >
-        <source path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res" >
+        <source path="C:\repo\droidProject\MyApplicationProject\MyApplication\src\main\res" >
             <file
                 name="arrow"
-                path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res\drawable-hdpi\arrow.png"
+                path="C:\repo\droidProject\MyApplicationProject\MyApplication\src\main\res\drawable-hdpi\arrow.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="book"
-                path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res\drawable-hdpi\book.png"
+                path="C:\repo\droidProject\MyApplicationProject\MyApplication\src\main\res\drawable-hdpi\book.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="buybook"
-                path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res\drawable-hdpi\buybook.png"
+                path="C:\repo\droidProject\MyApplicationProject\MyApplication\src\main\res\drawable-hdpi\buybook.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="ic_launcher"
-                path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res\drawable-hdpi\ic_launcher.png"
+                path="C:\repo\droidProject\MyApplicationProject\MyApplication\src\main\res\drawable-hdpi\ic_launcher.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="listicon"
-                path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res\drawable-hdpi\listicon.png"
+                path="C:\repo\droidProject\MyApplicationProject\MyApplication\src\main\res\drawable-hdpi\listicon.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="ic_launcher"
-                path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res\drawable-mdpi\ic_launcher.png"
+                path="C:\repo\droidProject\MyApplicationProject\MyApplication\src\main\res\drawable-mdpi\ic_launcher.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="ic_launcher"
-                path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res\drawable-xhdpi\ic_launcher.png"
+                path="C:\repo\droidProject\MyApplicationProject\MyApplication\src\main\res\drawable-xhdpi\ic_launcher.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
                 name="ic_launcher"
-                path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res\drawable-xxhdpi\ic_launcher.png"
+                path="C:\repo\droidProject\MyApplicationProject\MyApplication\src\main\res\drawable-xxhdpi\ic_launcher.png"
                 qualifiers="xxhdpi"
                 type="drawable" />
             <file
                 name="activitylayout"
-                path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res\layout\activitylayout.xml"
+                path="C:\repo\droidProject\MyApplicationProject\MyApplication\src\main\res\layout\activitylayout.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="activity_item_detail"
-                path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res\layout\activity_item_detail.xml"
+                path="C:\repo\droidProject\MyApplicationProject\MyApplication\src\main\res\layout\activity_item_detail.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="activity_item_list"
-                path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res\layout\activity_item_list.xml"
+                path="C:\repo\droidProject\MyApplicationProject\MyApplication\src\main\res\layout\activity_item_list.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="activity_item_twopane"
-                path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res\layout\activity_item_twopane.xml"
+                path="C:\repo\droidProject\MyApplicationProject\MyApplication\src\main\res\layout\activity_item_twopane.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="fragment_item_detail"
-                path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res\layout\fragment_item_detail.xml"
+                path="C:\repo\droidProject\MyApplicationProject\MyApplication\src\main\res\layout\fragment_item_detail.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="home_page"
-                path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res\layout\home_page.xml"
+                path="C:\repo\droidProject\MyApplicationProject\MyApplication\src\main\res\layout\home_page.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="listrow"
-                path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res\layout\listrow.xml"
+                path="C:\repo\droidProject\MyApplicationProject\MyApplication\src\main\res\layout\listrow.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="list_row"
-                path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res\layout\list_row.xml"
+                path="C:\repo\droidProject\MyApplicationProject\MyApplication\src\main\res\layout\list_row.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="login_page"
-                path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res\layout\login_page.xml"
+                path="C:\repo\droidProject\MyApplicationProject\MyApplication\src\main\res\layout\login_page.xml"
                 qualifiers=""
                 type="layout" />
             <file
-                path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res\values\category_dropdown_list.xml"
+                path="C:\repo\droidProject\MyApplicationProject\MyApplication\src\main\res\values\category_dropdown_list.xml"
                 qualifiers="" >
                 <string-array name="categories_array" >
                     <item>
@@ -107,7 +107,7 @@ Subject
                 </string-array>
             </file>
             <file
-                path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res\values\endless_list_usingfragment_strings.xml"
+                path="C:\repo\droidProject\MyApplicationProject\MyApplication\src\main\res\values\endless_list_usingfragment_strings.xml"
                 qualifiers="" >
                 <string name="loading_message" >Loading...
                 </string>
@@ -117,7 +117,7 @@ Subject
                 </string>
             </file>
             <file
-                path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res\values\strings.xml"
+                path="C:\repo\droidProject\MyApplicationProject\MyApplication\src\main\res\values\strings.xml"
                 qualifiers="" >
                 <string name="title_item_detail" >Item Detail
                 </string>
@@ -125,7 +125,7 @@ Subject
                 </string>
             </file>
             <file
-                path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res\values\styles.xml"
+                path="C:\repo\droidProject\MyApplicationProject\MyApplication\src\main\res\values\styles.xml"
                 qualifiers="" >
 
                 <style
@@ -147,7 +147,7 @@ Subject
                 </style>
             </file>
             <file
-                path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res\values-large\refs.xml"
+                path="C:\repo\droidProject\MyApplicationProject\MyApplication\src\main\res\values-large\refs.xml"
                 qualifiers="large" >
                 <item
                     name="activity_item_list"
@@ -156,7 +156,7 @@ Subject
                 </item>
             </file>
             <file
-                path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res\values-sw600dp\refs.xml"
+                path="C:\repo\droidProject\MyApplicationProject\MyApplication\src\main\res\values-sw600dp\refs.xml"
                 qualifiers="sw600dp" >
                 <item
                     name="activity_item_list"
@@ -165,7 +165,7 @@ Subject
                 </item>
             </file>
             <file
-                path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res\values-v11\styles.xml"
+                path="C:\repo\droidProject\MyApplicationProject\MyApplication\src\main\res\values-v11\styles.xml"
                 qualifiers="v11" >
 
                 <style
@@ -176,7 +176,7 @@ Subject
                 </style>
             </file>
             <file
-                path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res\values-v14\styles.xml"
+                path="C:\repo\droidProject\MyApplicationProject\MyApplication\src\main\res\values-v14\styles.xml"
                 qualifiers="v14" >
 
                 <style
@@ -188,14 +188,14 @@ Subject
             </file>
             <file
                 name="searchable"
-                path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\res\xml\searchable.xml"
+                path="C:\repo\droidProject\MyApplicationProject\MyApplication\src\main\res\xml\searchable.xml"
                 qualifiers=""
                 type="xml" />
         </source>
-        <source path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\build\res\rs\debug" />
+        <source path="C:\repo\droidProject\MyApplicationProject\MyApplication\build\res\rs\debug" />
     </dataSet>
     <dataSet config="debug" >
-        <source path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\debug\res" />
+        <source path="C:\repo\droidProject\MyApplicationProject\MyApplication\src\debug\res" />
     </dataSet>
 
 </merger>

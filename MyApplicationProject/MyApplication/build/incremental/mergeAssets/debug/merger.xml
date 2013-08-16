@@ -2,10 +2,10 @@
 <merger>
 
     <dataSet config="main" >
-        <source path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\main\assets" />
+        <source path="C:\repo\droidProject\MyApplicationProject\MyApplication\src\main\assets" />
     </dataSet>
     <dataSet config="debug" >
-        <source path="C:\AndroidStudioProjects\MyApplicationProject\MyApplication\src\debug\assets" />
+        <source path="C:\repo\droidProject\MyApplicationProject\MyApplication\src\debug\assets" />
     </dataSet>
 
 </merger>

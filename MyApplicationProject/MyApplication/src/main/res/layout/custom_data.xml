@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/custom_thumbnail"
+    android:layout_width="100dip"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dip" >
+
+    <ImageView
+            android:id="@+id/book_image"
+            android:layout_width="match_parent"
+            android:layout_height="120dip"
+            android:src="@drawable/book"/>
+
+    <TextView
+            android:id="@+id/book_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/book_image"
+            android:textColor="#2F4F4F"
+            android:lines="2"
+            android:gravity="center"
+            android:ellipsize="end"
+            android:textSize="12dip"
+            android:layout_toRightOf="@+id/thumbnail"
+            android:text="A brief History of Time" />
+
+    <TextView
+            android:id="@+id/book_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/book_name"
+            android:ellipsize="end"
+            android:lines="1"
+            android:textColor="#008000"
+            android:gravity="center"
+            android:textSize="14dip"
+            android:text="FREE" />
+
+</RelativeLayout>
