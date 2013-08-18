@@ -29,6 +29,7 @@ package com.example.myapplication;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.database.DataSetObserver;
 import android.graphics.Canvas;
@@ -40,6 +41,7 @@ import android.os.Parcelable;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.widget.EdgeEffectCompat;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.HapticFeedbackConstants;
 import android.view.MotionEvent;
@@ -85,7 +87,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
     /** Defines where to insert items into the ViewGroup, as defined in {@code ViewGroup #addViewInLayout(View, int, LayoutParams, boolean)} */
     private static final int INSERT_AT_END_OF_LIST = -1;
     private static final int INSERT_AT_START_OF_LIST = 0;
-
+    private static final String TAG = "HorizontalListView";
     /** The velocity to use for overscroll absorption */
     private static final float FLING_DEFAULT_ABSORB_VELOCITY = 30f;
 
@@ -250,7 +252,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
                     mIsParentVerticiallyScrollableViewDisallowingInterceptTouchEvent = disallowIntercept;
                     return;
                 }
-
+                Log.e(TAG, "Inside While loop");
                 view = (View) view.getParent();
             }
         }
@@ -975,6 +977,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
 
     protected boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
         mFlingTracker.fling(mNextX, 0, (int) -velocityX, 0, 0, mMaxX, 0, 0);
+        requestParentListViewToNotInterceptTouchEvents(true);
         setCurrentScrollState(OnScrollStateChangedListener.ScrollState.SCROLL_STATE_FLING);
         requestLayout();
         return true;
@@ -1019,7 +1022,10 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
         if (index >= 0 && !mBlockTouchAction) {
             View child = getChildAt(index);
             int adapterIndex = mLeftViewAdapterIndex + index;
-            Toast.makeText(getContext(), child.toString(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getContext(), child.toString(), Toast.LENGTH_SHORT).show();
+
+            startShowingItemdetailActivity();
+
             if (onItemClickListener != null) {
                 onItemClickListener.onItemClick(HorizontalListView.this, child, adapterIndex, mAdapter.getItemId(adapterIndex));
 
@@ -1036,6 +1042,10 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
         return false;
     }
 
+    private void startShowingItemdetailActivity(){
+        Intent detailIntent = new Intent(getContext(), ItemDetailActivity.class);
+        getContext().startActivity(detailIntent);
+    }
 
     /** If a view is currently pressed then unpress it */
     private void unpressTouchedChild() {
@@ -1057,6 +1067,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
 
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            requestParentListViewToNotInterceptTouchEvents(true);
             return HorizontalListView.this.onFling(e1, e2, velocityX, velocityY);
         }
 
@@ -1103,6 +1114,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+
         // Detect when the user lifts their finger off the screen after a touch
         if (event.getAction() == MotionEvent.ACTION_UP) {
             // If not flinging then we are idle now. The user just finished a finger scroll.

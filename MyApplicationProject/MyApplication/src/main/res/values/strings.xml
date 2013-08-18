@@ -3,5 +3,6 @@
 
     <string name="app_name">My Application</string>
     <string name="title_item_detail">Item Detail</string>
-
+	<string name="search_hint">Search item..</string>
+	<string name="search_label">Label</string>
 </resources>

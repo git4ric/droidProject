@@ -26,23 +26,20 @@ import android.widget.Toast;
  * Activity that calls an endless list using fragment 
  */
 public class endless_list_activity extends Activity implements FragmentEndlessList.Callbacks{
-    //Test commit
 
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activitylayout);
-
+        // Get the message from the intent
         Intent intent = getIntent();
+        String message = intent.getStringExtra("com.example.myapplication.homepage");
 
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            String query = intent.getStringExtra(SearchManager.QUERY);
-            Toast.makeText(getApplicationContext(), query, Toast.LENGTH_LONG).show();
-        }
+        setTitle("Search Results for " + message);
 
-        //use fragment
-        //add fragment as an endless list (as a FragmentList)           
+
+        //add fragment as an endless list (as a FragmentList)
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         FragmentEndlessList newFrag = new FragmentEndlessList();
         ft.add(R.id.layout1, newFrag);
