@@ -43,6 +43,27 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".endless_list_activity" />
         </activity>
+
+        <activity
+                android:name="com.example.myapplication.login_page"
+                android:label="Login to your account"
+                android:parentActivityName=".home_page">
+                >
+                <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".home_page"/>
+        </activity>
+
+        <activity
+                android:name="com.example.myapplication.registration_page"
+                android:label="Register new account"
+                android:parentActivityName=".login_page">
+            >
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".login_page"/>
+        </activity>
+
     </application>
 
 </manifest>

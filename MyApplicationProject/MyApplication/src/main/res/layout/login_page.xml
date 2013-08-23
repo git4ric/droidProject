@@ -7,22 +7,6 @@
   <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" android:background="#ffffff">
- 
-        <!--  Header Starts-->
-		<LinearLayout android:id="@+id/header"
-		android:layout_width="fill_parent"
-		android:layout_height="wrap_content"
-		android:paddingTop="5dip"
-		android:paddingBottom="5dip">
-			<!-- Logo Start-->
-			<ImageView android:src="@drawable/buybook"
-				android:layout_width="wrap_content"
-				android:layout_height="wrap_content"
-				android:layout_marginLeft="10dip"/>
-			<!-- Logo Ends -->
-		</LinearLayout>
-        <!--  Header Ends -->
-
       <!-- Login Form -->
       <LinearLayout
               xmlns:android="http://schemas.android.com/apk/res/android"
@@ -30,6 +14,7 @@
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:padding="10dip"
+              android:layout_centerVertical="true"
               android:layout_below="@id/header">
           <!--  Email Label -->
           <TextView android:layout_width="fill_parent"
@@ -40,7 +25,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dip"
                     android:layout_marginBottom="20dip"
-                    android:singleLine="true"/>
+                    android:singleLine="true"
+                    />
           <!--  Password Label -->
           <TextView android:layout_width="fill_parent"
                     android:layout_height="wrap_content"

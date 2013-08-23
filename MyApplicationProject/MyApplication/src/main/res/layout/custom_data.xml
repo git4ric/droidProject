@@ -24,7 +24,8 @@
             android:ellipsize="end"
             android:textSize="12dip"
             android:layout_toRightOf="@+id/thumbnail"
-            android:text="A brief History of Time" />
+            android:text="A brief History of Time"
+            />
 
     <TextView
             android:id="@+id/book_price"
