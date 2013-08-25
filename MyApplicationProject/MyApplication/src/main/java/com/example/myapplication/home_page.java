@@ -32,6 +32,9 @@ public class home_page extends Activity implements AdapterView.OnItemSelectedLis
 
     private HorizontalListView mHlvCustomList_Recently_Uploaded;
     private HorizontalListView mHlvCustomList1_Last_Viewed;
+    private int LOGIN_REQUEST_CODE = 1;
+    private boolean mUserLoggedIn;
+    private TextView mWelcomeText;
 
     // Need to fetch data
     private CustomData[] mCustomData = new CustomData[] {
@@ -49,6 +52,7 @@ public class home_page extends Activity implements AdapterView.OnItemSelectedLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mUserLoggedIn = false;
         // Set the page content
         setContentView(R.layout.home_page);
 
@@ -66,6 +70,7 @@ public class home_page extends Activity implements AdapterView.OnItemSelectedLis
         // Make the Horizontal scrollable list
         mHlvCustomList_Recently_Uploaded = (HorizontalListView) findViewById(R.id.hlvCustomList);
         mHlvCustomList1_Last_Viewed = (HorizontalListView) findViewById(R.id.hlvCustomList2);
+        mWelcomeText = (TextView)findViewById(R.id.WelcomeText);
         setupCustomLists();
 
         // Setup SearchView Widget
@@ -74,11 +79,43 @@ public class home_page extends Activity implements AdapterView.OnItemSelectedLis
     }
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == LOGIN_REQUEST_CODE) {
+
+            if(resultCode == RESULT_OK){
+                String userName = data.getStringExtra("MyApplication.username");
+                mWelcomeText.setText("Welcome, " + userName);
+                mUserLoggedIn = true;
+            }
+            if (resultCode == RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+    }
+
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_items, menu);
         return true;
+    }
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu)
+    {
+        MenuItem login = menu.findItem(R.id.Login);
+        MenuItem logout = menu.findItem(R.id.Logout);
+        if(mUserLoggedIn){
+            logout.setVisible(true);
+            login.setVisible(false);
+        }
+        else{
+            logout.setVisible(false);
+            login.setVisible(true);
+        }
+        return true;
     }
 
     @Override
@@ -87,13 +124,19 @@ public class home_page extends Activity implements AdapterView.OnItemSelectedLis
         switch (item.getItemId()) {
             case R.id.Login:
                 Intent i = new Intent(getApplicationContext(), login_page.class);
-                startActivity(i);
+                startActivityForResult(i,LOGIN_REQUEST_CODE);
                 return true;
+
+            case R.id.Logout:
+                // Session class instance
+                SessionManager session = new SessionManager(getApplicationContext());
+                session.logoutUser();
+                mUserLoggedIn = false;
+                mWelcomeText.setText("Welcome, Guest");
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-
 
     /**
      * Setup the SearchView widget to search

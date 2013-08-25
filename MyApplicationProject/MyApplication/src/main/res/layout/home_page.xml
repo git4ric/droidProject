@@ -12,8 +12,9 @@
         android:focusableInTouchMode="true" >
             <!--  Header Starts-->
             <LinearLayout android:id="@+id/header"
-                          android:layout_width="fill_parent"
+                          android:layout_width="wrap_content"
                           android:layout_height="wrap_content"
+                          android:layout_alignParentLeft="true"
                           android:paddingTop="5dip"
                           android:paddingBottom="5dip">
                 <!-- Logo Start-->
@@ -23,6 +24,19 @@
                            android:layout_marginLeft="10dip"/>
                 <!-- Logo Ends -->
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/WelcomeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dip"
+                android:layout_marginRight="10dip"
+                android:paddingBottom="5dip"
+                android:layout_alignParentRight="true"
+                android:text="Welcome, Guest"
+                android:textColor="#FF4500"
+                android:textSize="15sp"/>
+
             <!--  Header Ends -->
             <Spinner
                     android:id="@+id/category_spinner"
@@ -79,6 +93,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Recently Uploaded"
+                    android:layout_marginLeft="10dip"
                     android:paddingBottom="15dip"
                     android:paddingTop="15dip"
                     android:layout_below="@id/category_spinner"
@@ -99,6 +114,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
+                    android:layout_marginLeft="10dip"
                     android:text="Last Viewed"
                     android:layout_below="@id/hlvCustomList"
                     android:textColor="#FF4500"

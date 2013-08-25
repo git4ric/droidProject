@@ -5,4 +5,5 @@
 	<string name="search_hint">Search item..</string>
 	<string name="search_label">Label</string>
 	<string name="login">Login</string>
+	<string name="logout">Logout</string>
 </resources>
