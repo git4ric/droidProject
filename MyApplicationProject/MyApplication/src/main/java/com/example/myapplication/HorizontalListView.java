@@ -92,7 +92,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
     private static final float FLING_DEFAULT_ABSORB_VELOCITY = 30f;
 
     /** The friction amount to use for the fling tracker */
-    private static final float FLING_FRICTION = 0.009f;
+    private static final float FLING_FRICTION = 0.018f;
 
     /** Used for tracking the state data necessary to restore the HorizontalListView to its previous state after a rotation occurs */
     private static final String BUNDLE_ID_CURRENT_X = "BUNDLE_ID_CURRENT_X";
@@ -976,13 +976,12 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
     }
 
     protected boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        mFlingTracker.fling(mNextX, 0, (int) -velocityX, 0, 0, mMaxX, 0, 0);
         requestParentListViewToNotInterceptTouchEvents(true);
+        mFlingTracker.fling(mNextX, 0, (int) -velocityX, 0, 0, mMaxX, 0, 0);
         setCurrentScrollState(OnScrollStateChangedListener.ScrollState.SCROLL_STATE_FLING);
         requestLayout();
         return true;
     }
-    Context mContext;
 
     protected boolean onDown(MotionEvent e) {
         // If the user just caught a fling, then disable all touch actions until they release their finger
@@ -1024,6 +1023,7 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
             int adapterIndex = mLeftViewAdapterIndex + index;
             //Toast.makeText(getContext(), child.toString(), Toast.LENGTH_SHORT).show();
 
+            //start showing item detail
             startShowingItemdetailActivity();
 
             if (onItemClickListener != null) {
@@ -1067,7 +1067,6 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
 
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            requestParentListViewToNotInterceptTouchEvents(true);
             return HorizontalListView.this.onFling(e1, e2, velocityX, velocityY);
         }
 

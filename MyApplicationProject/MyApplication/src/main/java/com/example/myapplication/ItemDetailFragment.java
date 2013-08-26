@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 /**
  * A fragment representing a single Item detail screen.
- * This fragment is either contained in a {@link ItemListActivity}
+ * This fragment is either contained
  * in two-pane mode (on tablets) or a {@link ItemDetailActivity}
  * on handsets.
  */
@@ -56,15 +56,6 @@ public class ItemDetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_item_detail, container, false);
-
-        // Show the dummy content as text in a TextView.
-        if (mListElement!= null) {
-            Log.i(TAG,"Text: " + mListElement.text);
-            ((TextView) rootView.findViewById(R.id.item_detail)).setText(mListElement.text);
-        }
-        else{
-            Log.i(TAG,"Something went wrong");
-        }
 
         return rootView;
     }

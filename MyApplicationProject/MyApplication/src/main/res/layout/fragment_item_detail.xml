@@ -1,12 +1,163 @@
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/item_detail"
-    style="?android:attr/textAppearanceLarge"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
-    android:textIsSelectable="true"
-    tools:context=".ItemDetailFragment"
-    android:autoText="false"
-    android:background="#ffffff"
-    android:text="Book Information"/>
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/rl_item_detail"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#ffffff"
+                    android:gravity=""
+                    android:descendantFocusability="beforeDescendants"
+                    android:focusableInTouchMode="true" >
+        <ImageView android:src="@drawable/book"
+                   android:id="@+id/book_pic"
+                   android:layout_width="fill_parent"
+                   android:layout_height="wrap_content"
+                   android:layout_centerHorizontal="true"
+                   android:layout_marginBottom="20dip"
+                   android:padding="10dip"/>
+
+        <TextView
+                android:id="@+id/book_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/book_pic"
+                android:textColor="#2F4F4F"
+                android:lines="2"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:text="A brief History of Time"
+                />
+
+        <View
+                android:id="@+id/between_name_description"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dip"
+                android:layout_below="@id/book_name"
+                android:background="@android:color/darker_gray"/>
+
+        <TextView
+                android:id="@+id/tag_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_marginTop="10dip"
+                android:layout_marginBottom="10dip"
+                android:textSize="15sp"
+                android:text="Description:"
+                android:layout_below="@id/between_name_description"/>
+
+
+        <TextView
+                android:id="@+id/book_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tag_description"
+                android:textColor="#2F4F4F"
+                android:maxLines="10"
+                android:textSize="15sp"
+                android:text="Oh let the sun beat down upon my face, stars to fill my dream.I am a traveler of both time and space, to be where I have been.To sit with elders of the gentle race, this world has seldom seen.They talk of days for which they sit and wait and all will be revealed."
+                />
+
+        <View
+                android:id="@+id/between_description_price"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dip"
+                android:layout_marginBottom="10dip"
+                android:layout_below="@id/book_description"
+                android:background="@android:color/darker_gray"/>
+
+        <TextView
+                android:id="@+id/tag_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_marginTop="10dip"
+                android:layout_marginBottom="10dip"
+                android:textSize="15sp"
+                android:text="Price:"
+                android:layout_below="@id/between_description_price"/>
+
+        <TextView
+                android:id="@+id/detail_book_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip"
+                android:layout_marginBottom="10dip"
+                android:layout_marginLeft="10dip"
+                android:layout_below="@id/between_description_price"
+                android:layout_toRightOf="@id/tag_price"
+                android:textColor="#008000"
+                android:textSize="15sp"
+                android:text="$199.99 only"
+                />
+
+        <View
+                android:id="@+id/between_price_contact"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dip"
+                android:layout_marginBottom="10dip"
+                android:layout_below="@id/tag_price"
+                android:background="@android:color/darker_gray"/>
+
+        <TextView
+                android:id="@+id/tag_contact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_marginTop="10dip"
+                android:layout_marginBottom="10dip"
+                android:textSize="15sp"
+                android:text="Contact:"
+                android:layout_below="@id/between_price_contact"/>
+
+        <TextView
+                android:id="@+id/detail_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip"
+                android:layout_marginBottom="10dip"
+                android:layout_marginLeft="10dip"
+                android:layout_below="@id/between_price_contact"
+                android:layout_toRightOf="@id/tag_contact"
+                android:textColor="#2F4F4F"
+                android:textSize="15sp"
+                android:text="Ripul"
+                />
+
+        <TextView
+                android:id="@+id/tag_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_marginTop="10dip"
+                android:layout_marginBottom="10dip"
+                android:textSize="15sp"
+                android:text="Phone:"
+                android:layout_below="@id/tag_contact"/>
+
+        <TextView
+                android:id="@+id/detail_user_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip"
+                android:layout_marginBottom="10dip"
+                android:layout_marginLeft="10dip"
+                android:layout_below="@id/tag_contact"
+                android:layout_toRightOf="@id/tag_phone"
+                android:textColor="#2F4F4F"
+                android:textSize="15sp"
+                android:text="647-704-3878"
+                />
+
+    </RelativeLayout>
+</ScrollView>
