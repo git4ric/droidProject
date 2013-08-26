@@ -8,35 +8,45 @@ import android.os.Build;
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class CustomData extends Fragment{
 
-    private String bookName;
-    private String bookPrice;
-    private String imgName;
+    private String mBookNAme;
+    private String mBookPrice;
+    private String mImgName;
+    long mBookRowId; // rowID is the id associated with each book given by web service
 
-    public CustomData(String name, String price,String picName) {
-        bookPrice = price;
-        bookName = name;
-        imgName = picName;
+    public CustomData(long id, String name, String price,String picName) {
+        mBookPrice = price;
+        mBookNAme = name;
+        mImgName = picName;
+        mBookRowId = id;
+    }
+
+    /**
+    *@return the bookRowId associated with book
+    */
+    public long getBookRowID(){
+        return mBookRowId;
     }
 
     /**
      * @return the text
      */
     public String getBookName() {
-        return bookName;
+        return mBookNAme;
     }
 
     /**
      * @return the text
      */
     public String getBookPrice() {
-        return bookPrice;
+        return mBookPrice;
     }
 
     /**
      * @return the text
      */
     public String getImgName() {
-        return imgName;
+        return mImgName;
     }
+
 
 }

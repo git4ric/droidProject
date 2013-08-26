@@ -38,14 +38,14 @@ public class home_page extends Activity implements AdapterView.OnItemSelectedLis
 
     // Need to fetch data
     private CustomData[] mCustomData = new CustomData[] {
-            new CustomData("A Game of Thrones","$99","img1"),
-            new CustomData("A Clash of Kings","$99","img1"),
-            new CustomData("A Storm of Swords","$199","img2"),
-            new CustomData("A Feast for Crows","$199","img2"),
-            new CustomData("A Dance With Dragons","$199","img2"),
-            new CustomData("Fifty Shades of Grey","$20","img3"),
-            new CustomData("Whoops, that was not supposed to be there","FREE","img4"),
-            new CustomData("Chicken Soup for Naughty souls","$49.99","img5")
+            new CustomData(12,"A Game of Thrones","$99","img1"),
+            new CustomData(13,"A Clash of Kings","$99","img1"),
+            new CustomData(14,"A Storm of Swords","$199","img2"),
+            new CustomData(15,"A Feast for Crows","$199","img2"),
+            new CustomData(16,"A Dance With Dragons","$199","img2"),
+            new CustomData(17,"Fifty Shades of Grey","$20","img3"),
+            new CustomData(18,"Whoops, that was not supposed to be there","FREE","img4"),
+            new CustomData(19,"Chicken Soup for Naughty souls","$49.99","img5")
     };
 
     @Override

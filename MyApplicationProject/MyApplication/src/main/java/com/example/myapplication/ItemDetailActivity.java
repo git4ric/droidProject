@@ -33,16 +33,17 @@ public class ItemDetailActivity extends FragmentActivity {
         // http://developer.android.com/guide/components/fragments.html
         //
         if (savedInstanceState == null) {
+
+            Intent intent = getIntent();
+
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
             Bundle arguments = new Bundle();
-            arguments.putString(ItemDetailFragment.ARG_ITEM_ID,
-                    getIntent().getStringExtra(ItemDetailFragment.ARG_ITEM_ID));
+            arguments.putString(ItemDetailFragment.ARG_ITEM_ID,getIntent().getStringExtra(ItemDetailFragment.ARG_ITEM_ID));
+            arguments.putLong("BOOK_ROW_ID",intent.getLongExtra("BOOK_ROW_ID",0));
             ItemDetailFragment fragment = new ItemDetailFragment();
             fragment.setArguments(arguments);
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.item_detail_container, fragment)
-                    .commit();
+            getSupportFragmentManager().beginTransaction().add(R.id.item_detail_container, fragment).commit();
         }
     }
 

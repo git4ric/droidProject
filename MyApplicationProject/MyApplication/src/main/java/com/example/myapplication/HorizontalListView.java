@@ -52,6 +52,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.Scroller;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -1024,7 +1025,8 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
             //Toast.makeText(getContext(), child.toString(), Toast.LENGTH_SHORT).show();
 
             //start showing item detail
-            startShowingItemdetailActivity();
+            startShowingItemdetailActivity(child);
+
 
             if (onItemClickListener != null) {
                 onItemClickListener.onItemClick(HorizontalListView.this, child, adapterIndex, mAdapter.getItemId(adapterIndex));
@@ -1042,8 +1044,14 @@ public class HorizontalListView extends AdapterView<ListAdapter> {
         return false;
     }
 
-    private void startShowingItemdetailActivity(){
+    private void startShowingItemdetailActivity(View child){
+
+        // Get the holder object which holds all the book details
+        CustomArrayAdapter.Holder holder = (CustomArrayAdapter.Holder) child.getTag();
+//      Toast.makeText(getContext(), String.valueOf(holder.bookRowID), Toast.LENGTH_SHORT).show();
+
         Intent detailIntent = new Intent(getContext(), ItemDetailActivity.class);
+        detailIntent.putExtra("BOOK_ROW_ID",holder.bookRowID);
         getContext().startActivity(detailIntent);
     }
 

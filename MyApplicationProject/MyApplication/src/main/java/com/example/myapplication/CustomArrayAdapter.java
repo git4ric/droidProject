@@ -42,6 +42,7 @@ public class CustomArrayAdapter extends ArrayAdapter<CustomData> {
         holder.bookName.setText(getItem(position).getBookName());
         holder.bookPrice.setText(getItem(position).getBookPrice());
         holder.bookImage.setImageResource(getDrawable(getContext(),getItem(position).getImgName()));
+        holder.bookRowID = getItem(position).getBookRowID();
 
         // Set the color
         //convertView.setBackgroundColor(getItem(position).getBackgroundColor());
@@ -59,9 +60,10 @@ public class CustomArrayAdapter extends ArrayAdapter<CustomData> {
     }
 
     /** View holder for the views we need access to */
-    private static class Holder {
+    public static class Holder {
         public TextView bookName;
         public TextView bookPrice;
         public ImageView bookImage;
+        public long bookRowID;
     }
 }

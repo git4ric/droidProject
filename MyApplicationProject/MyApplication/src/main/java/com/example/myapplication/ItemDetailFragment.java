@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * A fragment representing a single Item detail screen.
@@ -20,7 +21,6 @@ public class ItemDetailFragment extends Fragment {
      * represents.
      */
     public static final String ARG_ITEM_ID = "item_id";
-
 
     private static final String TAG = "ItemDetailFragment";
 
@@ -49,6 +49,12 @@ public class ItemDetailFragment extends Fragment {
             //mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
 
             mListElement = ListContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+        }
+
+        // Get the info on which book was selected 
+        if(getArguments().containsKey("BOOK_ROW_ID")){
+            long bookRowID = this.getArguments().getLong("BOOK_ROW_ID");
+            Toast.makeText(getActivity(), String.valueOf(bookRowID), Toast.LENGTH_SHORT).show();
         }
     }
 
