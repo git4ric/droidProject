@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+
 /**
  * Activity that calls an endless list using fragment 
  */

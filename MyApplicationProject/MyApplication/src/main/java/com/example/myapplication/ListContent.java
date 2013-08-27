@@ -13,16 +13,16 @@ public class ListContent {
     /**
      * An array of sample (dummy) items.
      */
-    public static List<ListElement> ITEMS = new ArrayList<ListElement>();
+    public static List<CustomData> ITEMS = new ArrayList<CustomData>();
 
     /**
      * A map of sample (dummy) items, by ID.
      */
-    public static Map<String, ListElement> ITEM_MAP = new HashMap<String, ListElement>();
+    public static Map<String,CustomData> ITEM_MAP = new HashMap<String, CustomData>();
 
 
-    public void addItem(ListElement item) {
+    public void addItem(CustomData item) {
         ITEMS.add(item);
-        ITEM_MAP.put(Integer.toString(item.id), item);
+        ITEM_MAP.put(Long.toString(item.mBookRowId), item);
     }
 }

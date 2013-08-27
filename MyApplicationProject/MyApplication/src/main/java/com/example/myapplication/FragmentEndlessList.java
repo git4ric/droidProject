@@ -22,6 +22,24 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+
+import com.android.volley.Request;
+import com.android.volley.Request.Method;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.Response.ErrorListener;
+import com.android.volley.Response.Listener;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.ImageLoader.ImageCache;
+import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.NetworkImageView;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 /**
  * Class which holds an example of a endless list. It means a list will be
  * displayed and it will always have items to be displayed. <br>
@@ -103,7 +121,7 @@ public class FragmentEndlessList extends ListFragment {
 
         // Populate list
         arrayAdapter = new EndlessListAdapter(getActivity(), R.layout.list_row,
-                new ArrayList<ListElement>());
+                new ArrayList<CustomData>());
 
         // download asynchronously initial list
         DownloadItems downloadAction = new DownloadItems();
@@ -152,7 +170,7 @@ public class FragmentEndlessList extends ListFragment {
 
         // Notify the active callbacks interface (the activity, if the
         // fragment is attached to one) that an item has been selected.
-        mCallbacks.onItemSelected(ListContent.ITEMS.get(position).id);
+        mCallbacks.onItemSelected(ListContent.ITEMS.get(position).mId);
     }
 
     @Override
@@ -168,7 +186,7 @@ public class FragmentEndlessList extends ListFragment {
      * This method represents a service which takes a long time to be executed.
      * To simulate it, it is inserted a lag of 1 second. <br>
      * This method basically creates a <i>cache</i> number of
-     * {@link ListElement} and returns it. It creates {@link ListElement}s with
+     * {@link CustomData} and returns it. It creates {@link CustomData}s with
      * text higher than <i>itemNumber</i>.
      * 
      * @param itemNumber
@@ -176,22 +194,49 @@ public class FragmentEndlessList extends ListFragment {
      * @param numberOfItemsToBeCreated
      *            Number of items to be created.
      * 
-     * @return Returns the created list of {@link ListElement}s.
+     * @return Returns the created list of {@link CustomData}s.
      */
     private ListContent retrieveItems(Integer itemNumber,
             int numberOfItemsToBeCreated) {
 
         ListContent newContent = new ListContent();
+        List<CustomData> queriedData = null;
         try {
             // wait for 1 second in order to simulate the long service
-            Thread.sleep(500);
+            //Thread.sleep(500);
             // create items
-            for (int i = 0; i <= numberOfItemsToBeCreated; i++) {
 
-                String itemToBeAdded = getString(R.string.list_item_number,(itemNumber + i));
-                newContent.addItem(new ListElement((itemNumber+i),itemToBeAdded));
+            RequestQueue queue = Volley.newRequestQueue(this.getActivity());
+            String url = "http://krhbooks.com/api/1.0/data/searchQuery?_nkw=books&_sacat=0&_pg=0";
+            JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+
+
+
+
+                @Override
+                public void onResponse(JSONObject response) {
+                    CustomData data = new CustomData(0,0,"","","");
+
+
+
+                }
+            }, new Response.ErrorListener() {
+
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    // TODO Auto-generated method stub
+
+                }
+            });
+            queue.add(jsObjRequest);
+
+            if(queriedData != null){
+                for (int i = 0; i <= numberOfItemsToBeCreated; i++) {
+                    newContent.addItem(queriedData.get(i));
+                }
             }
-        } catch (InterruptedException e) {
+
+        } catch (Exception e) {
             // treat exception here
         }
         return newContent;
@@ -267,7 +312,7 @@ public class FragmentEndlessList extends ListFragment {
         @Override
         protected void onPostExecute(ListContent content) {
             arrayAdapter.setNotifyOnChange(true);
-            for (ListElement item : ListContent.ITEMS) {
+            for (CustomData item : ListContent.ITEMS) {
                 // it is necessary to verify whether the item was already added
                 // because this job is called many times asynchronously
                 synchronized (arrayAdapter) {
@@ -289,10 +334,10 @@ public class FragmentEndlessList extends ListFragment {
     /**
      * Adapter which handles the list be be displayed.
      */
-    class EndlessListAdapter extends ArrayAdapter<ListElement> {
+    class EndlessListAdapter extends ArrayAdapter<CustomData> {
 
         private final Activity context;
-        private final List<ListElement> items;
+        private final List<CustomData> items;
         private final int rowViewId;
 
         /**
@@ -307,7 +352,7 @@ public class FragmentEndlessList extends ListFragment {
          *            displayed.
          */
         public EndlessListAdapter(Activity context, int rowviewId,
-                List<ListElement> items) {
+                List<CustomData> items) {
             super(context, rowviewId, items);
             this.context = context;
             this.items = items;
@@ -320,22 +365,22 @@ public class FragmentEndlessList extends ListFragment {
          * @param item
          *            Item to be verified whether it is in the adapter.
          * 
-         * @return Returns <code>true</code> in case the {@link ListElement} is
+         * @return Returns <code>true</code> in case the {@link CustomData} is
          *         in the adapter, <code>false</code> otherwise.
          */
-        public boolean contains(ListElement item) {
+        public boolean contains(CustomData item) {
             return items.contains(item);
         }
 
         /**
-         * Get a {@link ListElement} at a certain position.
+         * Get a {@link CustomData} at a certain position.
          * 
          * @param index
-         *            Position where the {@link ListElement} is retrieved.
+         *            Position where the {@link CustomData} is retrieved.
          * 
-         * @return Returns the {@link ListElement} give a certain position.
+         * @return Returns the {@link CustomData} give a certain position.
          */
-        public ListElement getItemAt(int index) {
+        public CustomData getItemAt(int index) {
             return items.get(index);
         }
 
@@ -355,7 +400,7 @@ public class FragmentEndlessList extends ListFragment {
             rowView = inflater.inflate(rowViewId,null, true);
             textView = (TextView) rowView.findViewById(R.id.title);
             imageView = (ImageView) rowView.findViewById(R.id.img01);
-            textView.setText(items.get(position).text);
+
 //            imageView.setImageResource(items.get(position).imageId);
 
             /*

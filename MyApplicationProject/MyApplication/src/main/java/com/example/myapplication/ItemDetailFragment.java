@@ -29,7 +29,7 @@ public class ItemDetailFragment extends Fragment {
      */
     //private DummyContent.DummyItem mItem;
 
-    private ListElement mListElement;
+    private CustomData mListElement;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -51,7 +51,7 @@ public class ItemDetailFragment extends Fragment {
             mListElement = ListContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
         }
 
-        // Get the info on which book was selected 
+        // Get the info on which book was selected
         if(getArguments().containsKey("BOOK_ROW_ID")){
             long bookRowID = this.getArguments().getLong("BOOK_ROW_ID");
             Toast.makeText(getActivity(), String.valueOf(bookRowID), Toast.LENGTH_SHORT).show();
