@@ -8,15 +8,16 @@ import android.os.Build;
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 public class CustomData{
 
-    private String mBookNAme;
+    private String mBookName;
     private String mBookPrice;
     private String mImgName;
-    int mId;
+    private String mBookSubject;
+    private int mId;
     long mBookRowId; // rowID is the id associated with each book given by web service
 
     public CustomData(int id,long rowId, String name, String price,String picName) {
         mBookPrice = price;
-        mBookNAme = name;
+        mBookName = name;
         mImgName = picName;
         mBookRowId = rowId;
         mId = id;
@@ -29,6 +30,10 @@ public class CustomData{
         return mId;
     }
 
+    public void setId(int id){
+        mId = id;
+    }
+
     /**
     *@return the bookRowId associated with book
     */
@@ -36,11 +41,24 @@ public class CustomData{
         return mBookRowId;
     }
 
+    public void setmBookRowId(long id){
+        mBookRowId = id;
+    }
+
     /**
      * @return the text
      */
     public String getBookName() {
-        return mBookNAme;
+        return mBookName;
+    }
+
+    public void setmBookName(String name){
+        mBookName = name;
+    }
+
+
+    public void setmBookPrice(String price){
+        mBookPrice = price;
     }
 
     /**
@@ -58,4 +76,11 @@ public class CustomData{
     }
 
 
+    public String getmBookSubject() {
+        return mBookSubject;
+    }
+
+    public void setmBookSubject(String mBookSubject) {
+        this.mBookSubject = mBookSubject;
+    }
 }

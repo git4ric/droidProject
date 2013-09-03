@@ -13,7 +13,7 @@ public class ListContent {
     /**
      * An array of sample (dummy) items.
      */
-    public static List<CustomData> ITEMS = new ArrayList<CustomData>();
+    private static List<CustomData> ITEMS;
 
     /**
      * A map of sample (dummy) items, by ID.
@@ -24,5 +24,13 @@ public class ListContent {
     public void addItem(CustomData item) {
         ITEMS.add(item);
         ITEM_MAP.put(Long.toString(item.mBookRowId), item);
+    }
+
+    public ListContent(){
+        ITEMS = new ArrayList<CustomData>();
+    }
+
+    public List<CustomData> getItems(){
+        return ITEMS;
     }
 }

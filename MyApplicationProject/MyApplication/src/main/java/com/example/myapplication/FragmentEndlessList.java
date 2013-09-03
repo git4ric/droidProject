@@ -1,13 +1,18 @@
 package com.example.myapplication;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.app.Activity;
 import android.app.LauncherActivity.ListItem;
 import android.app.ListFragment;
+import android.gesture.GestureUtils;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +28,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Request.Method;
 import com.android.volley.RequestQueue;
@@ -38,6 +44,7 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -45,7 +52,19 @@ import org.json.JSONObject;
  * displayed and it will always have items to be displayed. <br>
  * New data is loaded asynchronously in order to provide a good user experience.
  */
-public class FragmentEndlessList extends ListFragment { 
+public class FragmentEndlessList extends ListFragment {
+
+
+    private static final String TAG_ROW_ID = "id";
+    private static final String TAG_SUBJECT = "subject";
+    private static final String TAG_PRICE = "price";
+    private static final String TAG_TITLE = "title";
+
+    private static final String ACTIVITY_TAG = "FragmentEndlessList: ";
+
+    private static String SEARCH_STRING = "";
+
+    private Activity activity;
     
     /**
      * Adapter for endless list.
@@ -69,18 +88,18 @@ public class FragmentEndlessList extends ListFragment {
      * The number of elements which are retrieved every time the service is
      * called for retrieving elements.
      */
-    private static final int BLOCK_SIZE = 15;
+    private static int LIST_SIZE;
 
     /**
      * The number of elements left in the list when the asynchronous service
      * will be called.
      */
-    private static final int LOAD_AHEAD_SIZE = 5;
+    private static final int LOAD_AHEAD_SIZE = 0;
 
     /**
      * The number of items added to the <i>totalSizeToBe</i> field.
      */
-    private static final int INCREMENT_TOTAL_MINIMUM_SIZE = 15;
+    private static final int INCREMENT_TOTAL_MINIMUM_SIZE = 1;
     
     /**
      * Property to save the top most index of the list
@@ -92,6 +111,29 @@ public class FragmentEndlessList extends ListFragment {
      * clicks.
      */
     private Callbacks mCallbacks = sDummyCallbacks;
+
+    /**
+    * List of items fetched from service
+    */
+    private List<CustomData> mListData;
+
+    /**
+     * Need to map each the thing which is unique to List Item ie rowId to item
+     */
+    public  Map<String,CustomData> ITEM_MAP = new HashMap<String, CustomData>();
+
+    /**
+     * Page number
+     */
+    private int mPageNo;
+
+    private ListView mListView;
+
+    private boolean mStopLoading;
+    /**
+    *
+    */
+    private static RequestQueue mReqQueue;
 
     /**
      * A callback interface that all activities containing this fragment must
@@ -116,38 +158,88 @@ public class FragmentEndlessList extends ListFragment {
     };
 
     @Override
+    public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        Log.e(ACTIVITY_TAG,"========= ----  onCreate ---- =========");
+        mListData = new ArrayList<CustomData>();
+        activity = getActivity();
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        Log.e(ACTIVITY_TAG,"========= ----  onActivityCreated ---- =========");
+        Bundle bundle = this.getArguments();
+        if(bundle != null){
+            SEARCH_STRING = bundle.getString("Search_String");
+        }
 
         // Populate list
-        arrayAdapter = new EndlessListAdapter(getActivity(), R.layout.list_row,
-                new ArrayList<CustomData>());
-
-        // download asynchronously initial list
-        DownloadItems downloadAction = new DownloadItems();
-        downloadAction.execute(new Integer[] { 0, BLOCK_SIZE });
+        arrayAdapter = new EndlessListAdapter(getActivity(),R.layout.list_row,mListData);
+        mReqQueue = Volley.newRequestQueue(this.getActivity());
+        activity.setProgressBarIndeterminateVisibility(true);
 
         setListAdapter(arrayAdapter);
-        getListView().setOnScrollListener(new EndlessListScrollListener());
+        // fetch items from service
+
+        retrieveItems(0,SEARCH_STRING,mPageNo);
+
+        mListView = getListView();
+        mListView.setOnScrollListener(new EndlessListScrollListener());
+
 
         if (savedInstanceState != null) {
             // Restore last state for top list position
             int listTopPosition = savedInstanceState.getInt(PROP_TOP_ITEM, 0);
 
             // load elements enough to get to the top of the list
-            downloadAction = new DownloadItems();
-            if (listTopPosition > BLOCK_SIZE) {
-                // download asynchronously initial list
-                downloadAction.execute(new Integer[] { BLOCK_SIZE,
-                        listTopPosition + BLOCK_SIZE, listTopPosition });
+           // downloadAction = new DownloadItems();
+            if (listTopPosition > LIST_SIZE) {
+              //do something
             }
         }
     }
 
     @Override
+    public void onPause(){
+        super.onPause();
+        Log.e(ACTIVITY_TAG,"========= ----  onPause ---- =========");
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        Log.e(ACTIVITY_TAG,"========= ----  onResume ---- =========");
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        Log.e(ACTIVITY_TAG,"========= ----  onStart ---- =========");
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        mListData.clear();
+        mStopLoading = false;
+        mReqQueue.cancelAll(this);
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        Log.e(ACTIVITY_TAG,"========= ----  onStop ---- =========");
+    }
+
+    @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-
+        Log.e(ACTIVITY_TAG,"========= ----  onAttach ---- =========");
+        LIST_SIZE = 0;
+        mPageNo = 0;
+        mStopLoading = true;
+        SEARCH_STRING = "";
         // Activities containing this fragment must implement its callbacks.
         if (!(activity instanceof Callbacks)) {
             throw new IllegalStateException("Activity must implement fragment's callbacks.");
@@ -159,7 +251,7 @@ public class FragmentEndlessList extends ListFragment {
     @Override
     public void onDetach() {
         super.onDetach();
-
+        Log.e(ACTIVITY_TAG,"========= ----  onDetach ---- =========");
         // Reset the active callbacks interface to the dummy implementation.
         mCallbacks = sDummyCallbacks;
     }
@@ -170,13 +262,14 @@ public class FragmentEndlessList extends ListFragment {
 
         // Notify the active callbacks interface (the activity, if the
         // fragment is attached to one) that an item has been selected.
-        mCallbacks.onItemSelected(ListContent.ITEMS.get(position).mId);
+        mCallbacks.onItemSelected(mListData.get(position).getId());
     }
 
     @Override
     public void onSaveInstanceState(Bundle state) {
         super.onSaveInstanceState(state);
-        int listPosition = getListView().getFirstVisiblePosition();
+        Log.e(ACTIVITY_TAG,"========= ----  onSaveInstanceState ---- =========");
+        int listPosition = mListView.getFirstVisiblePosition();
         if (listPosition > 0) {
             state.putInt(PROP_TOP_ITEM, listPosition);
         }
@@ -191,55 +284,74 @@ public class FragmentEndlessList extends ListFragment {
      * 
      * @param itemNumber
      *            Basic number to create other elements.
-     * @param numberOfItemsToBeCreated
-     *            Number of items to be created.
+     *
      * 
      * @return Returns the created list of {@link CustomData}s.
      */
-    private ListContent retrieveItems(Integer itemNumber,
-            int numberOfItemsToBeCreated) {
-
-        ListContent newContent = new ListContent();
-        List<CustomData> queriedData = null;
+    private void retrieveItems(final Integer itemNumber, String search, int pageNo) {
+        isLoading = true;
         try {
-            // wait for 1 second in order to simulate the long service
-            //Thread.sleep(500);
-            // create items
-
-            RequestQueue queue = Volley.newRequestQueue(this.getActivity());
-            String url = "http://krhbooks.com/api/1.0/data/searchQuery?_nkw=books&_sacat=0&_pg=0";
+            String url = "http://krhbooks.com/api/1.0/data/searchQuery?_nkw=" + search + "&_pg=" + Integer.toString(pageNo);
+            Log.e("Searching URL: ","" + url);
             JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-
-
-
-
-                @Override
+                 @Override
                 public void onResponse(JSONObject response) {
-                    CustomData data = new CustomData(0,0,"","","");
-
-
-
-                }
+                     Log.e("JSON RESPONSE from URL: ",response.toString());
+                     mStopLoading = false;
+                     parseJSONResponse(itemNumber, response);
+                 }
             }, new Response.ErrorListener() {
-
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    // TODO Auto-generated method stub
-
+                    Log.e("JSON Response Error","" + error.getMessage());
+                    try {
+                        String responseBody = new String(error.networkResponse.data, "utf-8" );
+                        Log.e("responseBody: ","" + responseBody);
+                        if(responseBody.equals("{}")){
+                            Log.e("responseBody: ","HERE HERE");
+                            mStopLoading = true;
+                            isLoading = false;
+                            mReqQueue.cancelAll(this);
+                        }
+                        //Handle a malformed json response
+                    } catch (UnsupportedEncodingException e) {
+                        e.printStackTrace();
+                    }
                 }
             });
-            queue.add(jsObjRequest);
-
-            if(queriedData != null){
-                for (int i = 0; i <= numberOfItemsToBeCreated; i++) {
-                    newContent.addItem(queriedData.get(i));
-                }
-            }
+            jsObjRequest.setRetryPolicy(new DefaultRetryPolicy(2000,DefaultRetryPolicy.DEFAULT_MAX_RETRIES,2.0f));
+            mReqQueue.add(jsObjRequest);
 
         } catch (Exception e) {
-            // treat exception here
+            e.printStackTrace();
         }
-        return newContent;
+    }
+
+    private void parseJSONResponse(int itemNumber, JSONObject response){
+        List<CustomData> queriedData = new ArrayList<CustomData>();
+        try{
+            JSONArray arr = response.getJSONArray("books");
+            for(int i=0;i<arr.length();i++){
+                CustomData data = new CustomData(0,0,"","","");
+                JSONObject objectData = arr.getJSONObject(i);
+                data.setmBookRowId(Long.valueOf(objectData.getString(TAG_ROW_ID)));
+                data.setmBookPrice(objectData.getString(TAG_PRICE));
+                data.setmBookSubject(objectData.getString(TAG_SUBJECT));
+                data.setmBookName(objectData.getString(TAG_TITLE));
+                data.setId(itemNumber + i);
+                queriedData.add(i,data);
+                ITEM_MAP.put(Long.toString(data.mBookRowId),data);
+            }
+        }
+        catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        mListData.addAll(queriedData);
+        LIST_SIZE = LIST_SIZE + mListData.size();
+        activity.setProgressBarIndeterminateVisibility(false);
+        arrayAdapter.notifyDataSetChanged();
+        isLoading = false;
     }
 
     /**
@@ -249,85 +361,31 @@ public class FragmentEndlessList extends ListFragment {
     class EndlessListScrollListener implements OnScrollListener {
 
         @Override
-        public void onScroll(AbsListView view, int firstVisibleItem,
-                int visibleItemCount, int totalItemCount) {
+        public void onScroll(AbsListView view, int firstVisibleItem,int visibleItemCount, int totalItemCount) {
 
             // load more elements if there are LOAD_AHEAD_SIZE left in the list
             // to be displayed
-            boolean loadMore = firstVisibleItem + visibleItemCount >= totalItemCount
-                    - LOAD_AHEAD_SIZE;
+            boolean loadMore = firstVisibleItem + visibleItemCount >= totalItemCount - LOAD_AHEAD_SIZE;
 
             /*
              * Add one more condition: only get more results in case the list
              * achieves a minimum size. This is necessary in order to avoid that
              * this method is called each time the condition above is reached
              * and the scroll is pressed.
+             *
+             * if (!mStopLoading && loadMore && totalSizeToBe <= totalItemCount) {
              */
-            if (loadMore && totalSizeToBe <= totalItemCount) {
+            if (!mStopLoading && loadMore) {
                 totalSizeToBe += INCREMENT_TOTAL_MINIMUM_SIZE;
-                // call service
-                DownloadItems downloadAction = new DownloadItems();
-                downloadAction.execute(new Integer[] { totalItemCount,
-                        BLOCK_SIZE });
+                mPageNo = mPageNo + 1;
+                retrieveItems(LIST_SIZE + 1,SEARCH_STRING,mPageNo);
+                arrayAdapter.notifyDataSetChanged();
             }
         }
 
         @Override
         public void onScrollStateChanged(AbsListView view, int scrollState) {
             // do nothing
-        }
-    }
-
-    /**
-     * Asynchronous job call. This class is responsible for calling the long
-     * service and managing the <i>isLoading</i> flag.
-     */
-    class DownloadItems extends AsyncTask<Integer, Void, ListContent> {
-
-        // indexes constants
-        private static final int ITEM_NUMBER_INDEX = 0;
-        private static final int NUMBER_OF_ITEMS_TO_BE_CREATED_INDEX = 1;
-        private static final int TOP_ITEM_INDEX = 2;
-
-        // position to scroll the list to
-        private int listTopPosition = 0;
-
-        @Override
-        protected void onPreExecute() {
-            // flag loading is being executed
-            isLoading = true;
-        }
-
-        @Override
-        protected ListContent doInBackground(Integer... params) {
-            if (params.length > TOP_ITEM_INDEX) {
-                listTopPosition = params[TOP_ITEM_INDEX];
-            }
-
-            // execute the long service
-            return retrieveItems(params[ITEM_NUMBER_INDEX],
-                    params[NUMBER_OF_ITEMS_TO_BE_CREATED_INDEX]);
-        }
-
-        @Override
-        protected void onPostExecute(ListContent content) {
-            arrayAdapter.setNotifyOnChange(true);
-            for (CustomData item : ListContent.ITEMS) {
-                // it is necessary to verify whether the item was already added
-                // because this job is called many times asynchronously
-                synchronized (arrayAdapter) {
-                    if (!arrayAdapter.contains(item)) {
-                        arrayAdapter.add(item);
-                    }
-                }
-            }
-            // flag the loading is finished
-            isLoading = false;
-
-            // update top list item after the list is loaded, if necessary
-            if (listTopPosition > 0) {
-                getListView().setSelection(listTopPosition);
-            }
         }
     }
     
@@ -337,7 +395,7 @@ public class FragmentEndlessList extends ListFragment {
     class EndlessListAdapter extends ArrayAdapter<CustomData> {
 
         private final Activity context;
-        private final List<CustomData> items;
+        private List<CustomData> items;
         private final int rowViewId;
 
         /**
@@ -386,46 +444,62 @@ public class FragmentEndlessList extends ListFragment {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-
             ImageView imageView;
-            TextView textView;
+            TextView textView_title;
+            TextView textView_price;
+            TextView textView_subject;
+
 
             View rowView = convertView;
 
-            /*
+            if(position <= LIST_SIZE){
+                /*
              * We inflate the row using the determined layout. Also, we fill the
              * necessary data in the text and image views.
              */
-            LayoutInflater inflater = context.getLayoutInflater();
-            rowView = inflater.inflate(rowViewId,null, true);
-            textView = (TextView) rowView.findViewById(R.id.title);
-            imageView = (ImageView) rowView.findViewById(R.id.img01);
+                LayoutInflater inflater = context.getLayoutInflater();
+                rowView = inflater.inflate(rowViewId,null, true);
+                textView_title = (TextView) rowView.findViewById(R.id.title);
+                textView_price = (TextView) rowView.findViewById(R.id.price);
+                textView_subject = (TextView) rowView.findViewById(R.id.author);
+                imageView = (ImageView) rowView.findViewById(R.id.list_image);
 
-//            imageView.setImageResource(items.get(position).imageId);
+                textView_title.setText(getItem(position).getBookName());
+                textView_price.setText(getItem(position).getBookPrice());
+                textView_subject.setText(getItem(position).getmBookSubject());
+                textView_subject.setVisibility(View.VISIBLE);
+                textView_price.setVisibility(View.VISIBLE);
+                imageView.setVisibility(View.VISIBLE);
 
-            /*
-             * If we reached the last position of the list and the loading
-             * operation is still being performed, set the loading message
-             * instead the normal value.
-             * 
-             * Moreover, we modify the layout in order to center the loading
-             * message.
-             */
-            if (isLoading && position == items.size() - 1) {
-                textView.setText(R.string.loading_message);
+                /*
+                 * If we reached the last position of the list and the loading
+                 * operation is still being performed, set the loading message
+                 * instead the normal value.
+                 *
+                 * Moreover, we modify the layout in order to center the loading
+                 * message.
+                 */
+                if (isLoading && position == items.size() - 1) {
+                    textView_title.setText(R.string.loading_message);
+                    textView_subject.setVisibility(View.INVISIBLE);
+                    textView_price.setVisibility(View.INVISIBLE);
+                    imageView.setVisibility(View.INVISIBLE);
 
-                // wrap content of the text view in order to center it
-                RelativeLayout.LayoutParams layoutParameters = (RelativeLayout.LayoutParams) textView
-                        .getLayoutParams();
-                layoutParameters.width = RelativeLayout.LayoutParams.WRAP_CONTENT;
+                    // wrap content of the text view in order to center it
+                    RelativeLayout.LayoutParams layoutParameters = (RelativeLayout.LayoutParams) textView_price
+                            .getLayoutParams();
+                    layoutParameters.width = RelativeLayout.LayoutParams.WRAP_CONTENT;
 
-                // set image to the center, the text field will go along
-                imageView
-                        .setImageResource(android.R.drawable.progress_indeterminate_horizontal);
-                RelativeLayout linearLayout = (RelativeLayout) rowView
-                        .findViewById(R.id.rl01);
-                linearLayout.setGravity(Gravity.CENTER);
+                    // set image to the center, the text field will go along
+                    imageView
+                            .setImageResource(android.R.drawable.progress_indeterminate_horizontal);
+                    RelativeLayout linearLayout = (RelativeLayout) rowView
+                            .findViewById(R.id.layout_list_row);
+                    linearLayout.setGravity(Gravity.CENTER);
+                }
             }
+
+
 
             return rowView;
         }

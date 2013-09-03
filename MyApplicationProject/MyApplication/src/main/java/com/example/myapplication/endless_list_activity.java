@@ -20,6 +20,8 @@ import android.app.FragmentTransaction;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Window;
 import android.widget.Toast;
 
 
@@ -31,7 +33,9 @@ public class endless_list_activity extends Activity implements FragmentEndlessLi
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.e("DEBUG","********************endless_list_activity Activity created **********************");
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
         setContentView(R.layout.activitylayout);
         // Get the message from the intent
         Intent intent = getIntent();
@@ -39,18 +43,31 @@ public class endless_list_activity extends Activity implements FragmentEndlessLi
 
         setTitle("Search Results for " + message);
 
-
         //add fragment as an endless list (as a FragmentList)
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         FragmentEndlessList newFrag = new FragmentEndlessList();
+        Bundle bundle=new Bundle();
+        bundle.putString("Search_String",message);
+        newFrag.setArguments(bundle);
         ft.add(R.id.layout1, newFrag);
         ft.commit();              
     }
 
     @Override
     public void onItemSelected(int id) {
+        Log.e("Item Clicked: ",Integer.toString(id));
         Intent detailIntent = new Intent(this, ItemDetailActivity.class);
-        detailIntent.putExtra(ItemDetailFragment.ARG_ITEM_ID, id);
+        detailIntent.putExtra("BOOK_ROW_ID",id);
         startActivity(detailIntent);
+
+//        Intent detailIntent = new Intent(this, ItemDetailActivity.class);
+//        detailIntent.putExtra(ItemDetailFragment.ARG_ITEM_ID, id);
+//        startActivity(detailIntent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.finish();
     }
 }
