@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.apache.http.client.protocol.RequestTargetAuthentication;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,6 +41,14 @@ public class ItemDetailFragment extends Fragment {
 
     private static final String TAG = "ItemDetailFragment";
 
+    private static ImageView mBookImageView;
+    private static TextView mBookNameView;
+    private static TextView mBookDescriptionView;
+    private static TextView mBookPriceView;
+    private static TextView mUserNameView;
+    private static TextView mUserPhoneView;
+    private static TextView mUserEmailView;
+
     private long BOOK_ROW_ID;
 
     /**
@@ -49,6 +59,15 @@ public class ItemDetailFragment extends Fragment {
     private CustomData mListElement;
 
     private static RequestQueue mFullReqQueue;
+
+    private String mUserName;
+    private String mUserEmail;
+    private String mUserPhone;
+    private String mBookDescription;
+    private String mImageLoc;
+    private String mBookAuthor;
+    private String mBookISBN;
+
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -61,6 +80,13 @@ public class ItemDetailFragment extends Fragment {
     public void onAttach(Activity activity){
         super.onAttach(activity);
         BOOK_ROW_ID = 0;
+        mUserName = "";
+        mUserPhone = "";
+        mBookAuthor = "";
+        mBookDescription = "";
+        mBookISBN = "";
+        mImageLoc = "";
+        mUserEmail = "";
     }
 
     @Override
@@ -118,13 +144,30 @@ public class ItemDetailFragment extends Fragment {
 
 
     private void parseJSONResponse(JSONObject response){
-      
+        try {
+            mBookDescription = response.getString("description");
+            mImageLoc = response.getString("imageLoc");
+            mBookISBN = response.getString("uIsbn");
+            mBookAuthor = response.getString("uAuthor");
+            mUserPhone = response.getString("uPhone");
+            //mUserName = response.getString("");
+            mUserEmail = response.getString("uEmail");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_item_detail, container, false);
+
+        mBookDescriptionView = (TextView) rootView.findViewById(R.id.book_description);
+        mBookImageView = (ImageView) rootView.findViewById(R.id.book_pic);
+        mBookDescriptionView = (TextView) rootView.findViewById(R.id.book_description);
+        mBookDescriptionView = (TextView) rootView.findViewById(R.id.book_description);
+
+
 
         return rootView;
     }
