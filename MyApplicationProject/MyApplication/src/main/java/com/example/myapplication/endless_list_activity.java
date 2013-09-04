@@ -54,8 +54,8 @@ public class endless_list_activity extends Activity implements FragmentEndlessLi
     }
 
     @Override
-    public void onItemSelected(int id) {
-        Log.e("Item Clicked: ",Integer.toString(id));
+    public void onItemSelected(long id) {
+        Log.e("Item Clicked: ",Long.toString(id));
         Intent detailIntent = new Intent(this, ItemDetailActivity.class);
         detailIntent.putExtra("BOOK_ROW_ID",id);
         startActivity(detailIntent);
