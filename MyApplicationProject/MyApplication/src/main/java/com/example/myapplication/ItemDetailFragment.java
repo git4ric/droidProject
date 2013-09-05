@@ -44,6 +44,8 @@ public class ItemDetailFragment extends Fragment {
     private static ImageView mBookImageView;
     private static TextView mBookNameView;
     private static TextView mBookDescriptionView;
+    private static TextView mBookAuthorView;
+    private static TextView mBookISBNView;
     private static TextView mBookPriceView;
     private static TextView mUserNameView;
     private static TextView mUserPhoneView;
@@ -162,13 +164,16 @@ public class ItemDetailFragment extends Fragment {
             Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_item_detail, container, false);
 
-        mBookDescriptionView = (TextView) rootView.findViewById(R.id.book_description);
         mBookImageView = (ImageView) rootView.findViewById(R.id.book_pic);
-        mBookDescriptionView = (TextView) rootView.findViewById(R.id.book_description);
-        mBookDescriptionView = (TextView) rootView.findViewById(R.id.book_description);
+        mBookNameView = (TextView) rootView.findViewById(R.id.detail_book_name);
+        mBookAuthorView = (TextView)rootView.findViewById(R.id.detail_book_author);
+        mBookISBNView = (TextView) rootView.findViewById(R.id.detail_book_isbn);
+        mBookDescriptionView = (TextView) rootView.findViewById(R.id.detail_book_description);
+        mBookPriceView= (TextView) rootView.findViewById(R.id.detail_book_price);
+        mUserNameView = (TextView) rootView.findViewById(R.id.detail_user_name);
+        mUserEmailView = (TextView) rootView.findViewById(R.id.detail_user_email);
+        mUserPhoneView = (TextView)rootView.findViewById(R.id.detail_user_phone);
 
-
-
-        return rootView;
+       return rootView;
     }
 }

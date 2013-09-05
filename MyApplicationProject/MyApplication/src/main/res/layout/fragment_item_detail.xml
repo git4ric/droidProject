@@ -11,8 +11,9 @@
                     android:gravity=""
                     android:descendantFocusability="beforeDescendants"
                     android:focusableInTouchMode="true" >
-        <ImageView android:src="@drawable/book"
-                   android:id="@+id/book_pic"
+
+        <ImageView android:id="@+id/book_pic"
+                   android:src="@drawable/img1"
                    android:layout_width="fill_parent"
                    android:layout_height="wrap_content"
                    android:layout_centerHorizontal="true"
@@ -20,7 +21,7 @@
                    android:padding="10dip"/>
 
         <TextView
-                android:id="@+id/book_name"
+                android:id="@+id/detail_book_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/book_pic"
@@ -32,11 +33,70 @@
                 />
 
         <View
-                android:id="@+id/between_name_description"
+                android:id="@+id/between_name_author"
                 android:layout_width="fill_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="10dip"
-                android:layout_below="@id/book_name"
+                android:layout_marginBottom="10dip"
+                android:layout_below="@id/detail_book_name"
+                android:background="@android:color/darker_gray"/>
+
+        <TextView
+                android:id="@+id/tag_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_marginTop="10dip"
+                android:layout_marginRight="10dip"
+                android:layout_marginBottom="10dip"
+                android:textSize="15sp"
+                android:text="Author:"
+                android:layout_below="@id/between_name_author"/>
+
+        <TextView
+                android:id="@+id/detail_book_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#2F4F4F"
+                android:maxLines="1"
+                android:layout_marginTop="10dip"
+                android:layout_marginBottom="10dip"
+                android:textSize="15sp"
+                android:text="Woh Kisna Hai"
+                android:layout_below="@id/between_name_author"
+                android:layout_toRightOf="@+id/tag_author"/>
+
+        <TextView
+                android:id="@+id/tag_isbn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_marginRight="10dip"
+                android:layout_marginTop="10dip"
+                android:layout_marginBottom="10dip"
+                android:textSize="15sp"
+                android:text="ISBN:"
+                android:layout_below="@id/tag_author"/>
+
+        <TextView
+                android:id="@+id/detail_book_isbn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#2F4F4F"
+                android:layout_marginTop="10dip"
+                android:textSize="15sp"
+                android:text="0105252552"
+                android:layout_below="@id/tag_author"
+                android:layout_toRightOf="@id/tag_isbn"/>
+
+        <View
+                android:id="@+id/between_author_description"
+                android:layout_width="fill_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dip"
+                android:layout_below="@id/tag_isbn"
                 android:background="@android:color/darker_gray"/>
 
         <TextView
@@ -49,11 +109,11 @@
                 android:layout_marginBottom="10dip"
                 android:textSize="15sp"
                 android:text="Description:"
-                android:layout_below="@id/between_name_description"/>
+                android:layout_below="@id/between_author_description"/>
 
 
         <TextView
-                android:id="@+id/book_description"
+                android:id="@+id/detail_book_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tag_description"
@@ -69,7 +129,7 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="10dip"
                 android:layout_marginBottom="10dip"
-                android:layout_below="@id/book_description"
+                android:layout_below="@id/detail_book_description"
                 android:background="@android:color/darker_gray"/>
 
         <TextView
@@ -77,8 +137,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#000000"
-                android:textStyle="bold"
                 android:layout_marginTop="10dip"
+                android:textStyle="bold"
                 android:layout_marginBottom="10dip"
                 android:textSize="15sp"
                 android:text="Price:"
@@ -88,8 +148,9 @@
                 android:id="@+id/detail_book_price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dip"
                 android:layout_marginBottom="10dip"
+                android:layout_marginTop="10dip"
+                android:maxLines="1"
                 android:layout_marginLeft="10dip"
                 android:layout_below="@id/between_description_price"
                 android:layout_toRightOf="@id/tag_price"
@@ -124,6 +185,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dip"
+                android:maxLines="1"
                 android:layout_marginBottom="10dip"
                 android:layout_marginLeft="10dip"
                 android:layout_below="@id/between_price_contact"
@@ -152,12 +214,37 @@
                 android:layout_marginTop="10dip"
                 android:layout_marginBottom="10dip"
                 android:layout_marginLeft="10dip"
+                android:maxLines="1"
                 android:layout_below="@id/tag_contact"
                 android:layout_toRightOf="@id/tag_phone"
                 android:textColor="#2F4F4F"
                 android:textSize="15sp"
                 android:text="647-704-3878"
-                />
+        />
+
+        <TextView
+                android:id="@+id/tag_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000000"
+                android:textStyle="bold"
+                android:layout_marginTop="10dip"
+                android:layout_marginBottom="10dip"
+                android:textSize="15sp"
+                android:text="Email:"
+                android:layout_below="@id/tag_phone"/>
+
+
+        <TextView
+                android:id="@+id/detail_user_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#2F4F4F"
+                android:maxLines="1"
+                android:textSize="15sp"
+                android:text="ripulrjain@gmail.com"
+                android:layout_alignTop="@+id/tag_email"
+                android:layout_toRightOf="@+id/tag_phone"/>
 
     </RelativeLayout>
 </ScrollView>
