@@ -144,7 +144,7 @@ public class FragmentEndlessList extends ListFragment {
         /**
          * Callback for when an item has been selected.
          */
-        public void onItemSelected(long id);
+        public void onItemSelected(long id, String bookName, String bookPrice);
     }
 
     /**
@@ -154,7 +154,7 @@ public class FragmentEndlessList extends ListFragment {
     private static Callbacks sDummyCallbacks = new Callbacks() {
 
         @Override
-        public void onItemSelected(long id) {
+        public void onItemSelected(long id, String bookName, String bookPrice) {
 
         }
     };
@@ -264,7 +264,7 @@ public class FragmentEndlessList extends ListFragment {
 
         // Notify the active callbacks interface (the activity, if the
         // fragment is attached to one) that an item has been selected.
-        mCallbacks.onItemSelected(mListData.get(position).getBookRowID());
+        mCallbacks.onItemSelected(mListData.get(position).getBookRowID(),mListData.get(position).getBookName(),mListData.get(position).getBookPrice());
     }
 
     @Override

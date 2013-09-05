@@ -41,6 +41,8 @@ public class ItemDetailActivity extends FragmentActivity {
             Bundle arguments = new Bundle();
             arguments.putString(ItemDetailFragment.ARG_ITEM_ID,getIntent().getStringExtra(ItemDetailFragment.ARG_ITEM_ID));
             arguments.putLong("BOOK_ROW_ID",intent.getLongExtra("BOOK_ROW_ID",0));
+            arguments.putString("BOOK_NAME",intent.getStringExtra("BOOK_NAME"));
+            arguments.putString("BOOK_PRICE",intent.getStringExtra("BOOK_PRICE"));
             ItemDetailFragment fragment = new ItemDetailFragment();
             fragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction().add(R.id.item_detail_container, fragment).commit();

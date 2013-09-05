@@ -69,6 +69,8 @@ public class ItemDetailFragment extends Fragment {
     private String mImageLoc;
     private String mBookAuthor;
     private String mBookISBN;
+    private String mBookName;
+    private String mBookPrice;
 
 
     /**
@@ -84,6 +86,8 @@ public class ItemDetailFragment extends Fragment {
         BOOK_ROW_ID = 0;
         mUserName = "";
         mUserPhone = "";
+        mBookName = "";
+        mBookPrice = "";
         mBookAuthor = "";
         mBookDescription = "";
         mBookISBN = "";
@@ -100,6 +104,12 @@ public class ItemDetailFragment extends Fragment {
             BOOK_ROW_ID = this.getArguments().getLong("BOOK_ROW_ID");
             //Toast.makeText(getActivity(), String.valueOf(bookRowID), Toast.LENGTH_SHORT).show();
         }
+        if(getArguments().containsKey("BOOK_NAME")){
+           mBookName = this.getArguments().getString("BOOK_NAME");
+        }
+        if(getArguments().containsKey("BOOK_PRICE")){
+            mBookPrice = this.getArguments().getString("BOOK_PRICE");
+        }
     }
 
     @Override
@@ -107,6 +117,7 @@ public class ItemDetailFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mFullReqQueue = Volley.newRequestQueue(this.getActivity());
         fetchItemDetail(Long.toString(BOOK_ROW_ID));
+
     }
 
     private void fetchItemDetail(String bookRowID) {
@@ -147,16 +158,21 @@ public class ItemDetailFragment extends Fragment {
 
     private void parseJSONResponse(JSONObject response){
         try {
-            mBookDescription = response.getString("description");
+            Log.e("ItemDetailFragment: JSON Response :",response.toString());
             mImageLoc = response.getString("imageLoc");
-            mBookISBN = response.getString("uIsbn");
+//          mBookName = got book name from extra
             mBookAuthor = response.getString("uAuthor");
-            mUserPhone = response.getString("uPhone");
-            //mUserName = response.getString("");
+            mBookISBN = response.getString("uIsbn");
+            mBookDescription = response.getString("description");
+//          mBookPrice = got book price from extra
+            mUserName = response.getString("Name");
             mUserEmail = response.getString("uEmail");
+            mUserPhone = response.getString("uPhone");
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        updateView();
     }
 
     @Override
@@ -175,5 +191,35 @@ public class ItemDetailFragment extends Fragment {
         mUserPhoneView = (TextView)rootView.findViewById(R.id.detail_user_phone);
 
        return rootView;
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        Log.e("ItemDetailFragment:","========= ----  onStart ---- =========");
+        updateView();
+    }
+
+    @Override
+    public void onDestroy(){
+        super.onDestroy();
+        mFullReqQueue.cancelAll(this);
+    }
+
+    private void updateView(){
+        //fetchImage(mImageLoc);
+        mBookNameView.setText(mBookName);
+        mBookAuthorView.setText(mBookAuthor);
+        if(mBookISBN.isEmpty()){
+            mBookISBNView.setText("Not Available");
+        }
+        else{
+            mBookISBNView.setText(mBookISBN);
+        }
+        mBookDescriptionView.setText(mBookDescription);
+        mBookPriceView.setText(mBookPrice);
+        mUserEmailView.setText(mUserName);
+        mUserEmailView.setText(mUserEmail);
+        mUserPhoneView.setText(mUserPhone);
     }
 }
